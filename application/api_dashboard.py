@@ -31,7 +31,7 @@ def main() :
 
 
     def load_model():
-        '''loading the trained model'''
+        '''Chargement du Modèle Entraîné'''
         pickle_in = open('model/classifier_xgb_model.pkl', 'rb') 
         clf = pickle.load(pickle_in)
         return clf
@@ -105,7 +105,7 @@ def main() :
     # SIDEBAR
     #######################################
 
-    #Title display
+    # Titre 
     html_temp = """
     <div style="background-color: tomato; padding:10px; border-radius:10px">
     <h1 style="color: white; text-align:center">Dashboard Scoring Credit</h1>
@@ -114,23 +114,23 @@ def main() :
     """
     st.markdown(html_temp, unsafe_allow_html=True)
 
-    #Customer ID selection
+    #Sélection ID Client
     st.sidebar.header("**General Info**")
 
-    #Loading selectbox
+    #Chargement Sélection
     chk_id = st.sidebar.selectbox("Client ID", id_client)
 
-    #Loading general info
+    #Informations Générales
     nb_credits, rev_moy, credits_moy, targets = load_infos_gen(data)
 
 
-    ### Display of information in the sidebar ###
-    #Number of loans in the sample
-    st.sidebar.markdown("<u>Number of loans in the sample :</u>", unsafe_allow_html=True)
+    ### Information Sidebar ###
+    #Nombre d'Emprunts dans l'Echantillon
+    st.sidebar.markdown("<u>Nombre d'Emprunts dans l'Echantillon :</u>", unsafe_allow_html=True)
     st.sidebar.text(nb_credits)
 
-    #Average income
-    st.sidebar.markdown("<u>Average income (USD) :</u>", unsafe_allow_html=True)
+    #Revenus Moyens
+    st.sidebar.markdown("<u>Revenus Moyens (USD) :</u>", unsafe_allow_html=True)
     st.sidebar.text(rev_moy)
 
     #AMT CREDIT
