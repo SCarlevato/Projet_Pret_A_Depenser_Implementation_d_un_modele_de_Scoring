@@ -19,8 +19,8 @@ def main() :
         z = ZipFile("data/data_final.zip")
         data = pd.read_csv(z.open('data_final.csv'), index_col='SK_ID_CURR', encoding ='utf-8')
 
-        z = ZipFile("data/X_sample.zip")
-        sample = pd.read_csv(z.open('X_sample.csv'), index_col='SK_ID_CURR', encoding ='utf-8')
+        z = ZipFile("data/X_enc.zip")
+        sample = pd.read_csv(z.open('X_enc.csv'), index_col='SK_ID_CURR', encoding ='utf-8')
         
         description = pd.read_csv("data/features_description.csv", 
                                   usecols=['Row', 'Description'], index_col=0, encoding= 'unicode_escape')
