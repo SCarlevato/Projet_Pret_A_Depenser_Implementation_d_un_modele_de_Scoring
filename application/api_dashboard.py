@@ -213,7 +213,7 @@ def main() :
     st.markdown("<u>Donnée Client :</u>", unsafe_allow_html=True)
     st.write(identite_client(data, chk_id))
 
-    #Feature importance / description
+    #Feature importance / Description
     if st.checkbox("ID Client {:.0f} feature importance ?".format(chk_id)):
         shap.initjs()
         X = sample.iloc[:, :-1]
@@ -234,7 +234,7 @@ def main() :
     else:
         st.markdown("<i>…</i>", unsafe_allow_html=True)
             
-    #Similar customer files display
+    #Présentation Dossiers Clients Similaires
     chk_voisins = st.checkbox("Dossiers Clients Similaires ?")
 
     if chk_voisins:
@@ -246,7 +246,7 @@ def main() :
         st.markdown("<i>…</i>", unsafe_allow_html=True)
         
     st.markdown('***')
-    st.markdown("Thanks for going through this Web App with me! I'd love feedback on this, so if you want to reach out you can find me on [twitter] (https://twitter.com/nalron_) or my [website](https://nalron.com/). *Code from [Github](https://github.com/nalron/project_credit_scoring_model)* ❤️")
+    st.markdown("Thanks for going through this Web App with me!")
 
 if __name__ == '__main__':
     main()
