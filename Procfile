@@ -1,1 +1,1 @@
-web: sh application/setup.sh && streamlit run application/ apidashboard.py
+web: sh application/setup.sh && streamlit run application/ api_dashboard.py
