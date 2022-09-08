@@ -102,7 +102,7 @@ def main() :
     <div style="background-color: tomato; padding:10px; border-radius:10px">
     <h1 style="color: white; text-align:center">Dashboard Scoring Credit</h1>
     </div>
-    <p style="font-size: 20px; font-weight: bold; text-align:center">Support de Décision de Crédit…</p>
+    <p style="font-size: 20px; font-weight: bold; text-align:center">Support de Décision de Crédit</p>
     """
     st.markdown(html_temp, unsafe_allow_html=True)
 
