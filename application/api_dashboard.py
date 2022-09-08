@@ -15,13 +15,13 @@ def main() :
 
     @st.cache
     def load_data():
-        z = ZipFile("/Users/sylvaincarlevato/p7scoringopenclassrooms/data/data_final.zip")
+        z = ZipFile("data/default_risk.zip")
         data = pd.read_csv(z.open('data_final.csv'), index_col='SK_ID_CURR', encoding ='utf-8')
 
-        z = ZipFile("/Users/sylvaincarlevato/p7scoringopenclassrooms/data/X_enc.zip")
+        z = ZipFile("data/X_enc.zip")
         sample = pd.read_csv(z.open('X_enc.csv'), index_col='SK_ID_CURR', encoding ='utf-8')
         
-        description = pd.read_csv("/Users/sylvaincarlevato/p7scoringopenclassrooms/data/features_description.csv",
+        description = pd.read_csv("data/features_description.csv",
                                   usecols=['Row', 'Description'], index_col=0, encoding= 'unicode_escape')
 
         target = data.iloc[:, -1:]
@@ -30,7 +30,7 @@ def main() :
 
     def load_model():
         '''Chargement du Modèle Entraîné'''
-        pickle_in = open('/Users/sylvaincarlevato/p7scoringopenclassrooms/modele/classifier_xgb_model.pkl', 'rb')
+        pickle_in = open('model/LGBMClassifier.pkl', 'rb')
         clf = pickle.load(pickle_in)
         return clf
 
