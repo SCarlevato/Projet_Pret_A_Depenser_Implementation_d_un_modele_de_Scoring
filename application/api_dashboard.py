@@ -30,7 +30,7 @@ def main() :
 
     def load_model():
         '''Chargement du Modèle Entraîné'''
-        pickle_in = open('modele/LGBMClassifier.pkl', 'rb')
+        pickle_in = open('modele/classifier_xgb_model.pkl', 'rb')
         clf = pickle.load(pickle_in)
         return clf
 
