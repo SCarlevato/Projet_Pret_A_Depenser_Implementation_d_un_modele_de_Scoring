@@ -233,7 +233,7 @@ def main() :
     else:
         st.markdown("<i>…</i>", unsafe_allow_html=True)
             
-    #Présentation des Dossiers de Clients Similaires
+    # Présentation des Dossiers de Clients Similaires :
     chk_voisins = st.checkbox("Observations Autres Dossiers Clients")
 
     if chk_voisins:
