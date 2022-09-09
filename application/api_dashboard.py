@@ -213,11 +213,11 @@ def main() :
     st.write(identite_client(data, chk_id))
 
     # Feature Importance / Description :
-    if st.checkbox("ID Client {:.0f} Feature Importance".format(chk_id)):
+    if st.checkbox("ID Client {:.0f} Feature Importance :".format(chk_id)):
         shap.initjs()
         X = sample.iloc[:, :-1]
         X = X[X.index == chk_id]
-        number = st.slider("Sélectionner un Nombre de Features", 0, 20, 5)
+        number = st.slider("Sélectionner un Nombre de Features :", 0, 20, 5)
 
         fig, ax = plt.subplots(figsize=(10, 10))
         explainer = shap.TreeExplainer(load_model())
@@ -225,7 +225,7 @@ def main() :
         shap.summary_plot(shap_values[0], X, plot_type ="bar", max_display=number, color_bar=False, plot_size=(5, 5))
         st.pyplot(fig)
         
-        if st.checkbox("Aide") :
+        if st.checkbox("Aide :") :
             list_features = description.index.to_list()
             feature = st.selectbox('Feature Checklist', list_features)
             st.table(description.loc[description.index == feature][:1])
@@ -234,7 +234,7 @@ def main() :
         st.markdown("<i>…</i>", unsafe_allow_html=True)
             
     # Présentation des Dossiers de Clients Similaires :
-    chk_voisins = st.checkbox("Observations Autres Dossiers Clients")
+    chk_voisins = st.checkbox("Observations Autres Dossiers Clients :")
 
     if chk_voisins:
         knn = load_knn(sample)
