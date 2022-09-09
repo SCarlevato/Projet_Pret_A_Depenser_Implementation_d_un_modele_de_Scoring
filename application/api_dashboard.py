@@ -94,10 +94,10 @@ def main() :
     clf = load_model()
 
     #######################################
-    # SIDEBAR
+    # SIDEBAR #
     #######################################
 
-    #Présentation du Titre :
+    # Présentation du Titre :
     html_temp = """
     <div style="background-color: tomato; padding:10px; border-radius:10px">
     <h1 style="color: white; text-align:center">Dashboard Scoring Credit</h1>
@@ -106,13 +106,13 @@ def main() :
     """
     st.markdown(html_temp, unsafe_allow_html=True)
 
-    #Sélection ID Client :
+    # Sélection ID Client :
     st.sidebar.header("**Informations Générales**")
 
-    #Chargement Case à Cocher :
+    # Chargement Case à Cocher :
     chk_id = st.sidebar.selectbox("Client ID", id_client)
 
-    #Chargement Informations Générales :
+    # Chargement Informations Générales :
     nb_credits, rev_moy, credits_moy, targets = load_infos_gen(data)
 
     ### Présentation des Informations dans la Sidebar ###
@@ -120,28 +120,28 @@ def main() :
     st.sidebar.markdown("<u>Nombre d'Emprunts dans notre Panel :</u>", unsafe_allow_html=True)
     st.sidebar.text(nb_credits)
 
-    #Revenu Moyen :
+    # Revenu Moyen :
     st.sidebar.markdown("<u>Revenu Moyen (USD) :</u>", unsafe_allow_html=True)
     st.sidebar.text(rev_moy)
 
-    #AMT CREDIT :
+    # AMT CREDIT :
     st.sidebar.markdown("<u>Amortissement Crédit (USD) :</u>", unsafe_allow_html=True)
     st.sidebar.text(credits_moy)
     
-    #PieChart :
+    # PieChart :
     st.sidebar.markdown("<u>......</u>", unsafe_allow_html=True)
     fig, ax = plt.subplots(figsize=(5,5))
     plt.pie(targets, explode=[0, 0.1], labels=['No default', 'Default'], autopct='%1.1f%%', startangle=90)
     st.sidebar.pyplot(fig)
         
     #######################################
-    # PAGE D'ACCUEIL
+    # PAGE D'ACCUEIL #
     #######################################
     
-    #Présentation ID Client Sidebar :
+    # Présentation ID Client Sidebar :
     st.write("Sélection ID Client :", chk_id)
 
-    #Présentation Information Client : Genre, Age, Statut Familial, Enfants :
+    # Présentation Information Client : Genre, Age, Statut Familial, Enfants :
     st.header("**Présentation Information Client**")
 
     if st.checkbox("Présentation Information Client :"):
@@ -152,7 +152,7 @@ def main() :
         st.write("**Statut Familial : **", infos_client["NAME_FAMILY_STATUS"].values[0])
         st.write("**Nombre d'Enfants : **{:.0f}".format(infos_client["CNT_CHILDREN"].values[0]))
 
-        #Graphique de Distribution des Ages :
+        # Graphique de Distribution des Ages :
         data_age = load_age_population(data)
         fig, ax = plt.subplots(figsize=(10, 5))
         sns.histplot(data_age, edgecolor = 'k', color="goldenrod", bins=20)
@@ -166,7 +166,7 @@ def main() :
         st.write("**Annuités : **{:.0f}".format(infos_client["AMT_ANNUITY"].values[0]))
         st.write("**Valeurs des Biens pour l'Octroi de Crédit : **{:.0f}".format(infos_client["AMT_GOODS_PRICE"].values[0]))
         
-        ##Graphique de Distribution de Revenus :
+        # Graphique de Distribution de Revenus :
         data_income = load_income_population(data)
         fig, ax = plt.subplots(figsize=(10, 5))
         sns.histplot(data_income["AMT_INCOME_TOTAL"], edgecolor = 'k', color="goldenrod", bins=10)
@@ -197,7 +197,7 @@ def main() :
     else:
         st.markdown("<i>…</i>", unsafe_allow_html=True)
 
-    #Présentation Solvabilité du Client
+    # Présentation Solvabilité du Client :
     st.header("**Analyse Fichier Client**")
     prediction = load_prediction(sample, chk_id, clf)
     st.write("**Probabilité Défaut : **{:.0f} %".format(round(float(prediction)*100, 2)))
@@ -212,7 +212,7 @@ def main() :
     st.markdown("<u>Données Client :</u>", unsafe_allow_html=True)
     st.write(identite_client(data, chk_id))
 
-    #Feature importance / Description
+    # Feature Importance / Description :
     if st.checkbox("ID Client {:.0f} Feature Importance".format(chk_id)):
         shap.initjs()
         X = sample.iloc[:, :-1]
