@@ -20,11 +20,6 @@ app = Flask(__name__)
 
 
 
-    def load_model():
-        '''Chargement du Modèle Entraîné'''
-        pickle_in = open('modele/classifier_xgb_model.pkl', 'rb')
-        clf = pickle.load(pickle_in)
-        return clf
 
     @st.cache(allow_output_mutation=True)
     def load_knn(sample):
@@ -45,9 +40,7 @@ app = Flask(__name__)
 
         return nb_credits, rev_moy, credits_moy, targets
 
-    def identite_client(data, id):
-        data_client = data[data.index == int(id)]
-        return data_client
+
 
     @st.cache
     def load_age_population(data):
@@ -80,10 +73,7 @@ app = Flask(__name__)
         knn = KMeans(n_clusters=2).fit(sample)
         return knn
 
-    #Chargement des Données :
-    data, sample, target, description = load_data()
-    id_client = sample.index.values
-    clf = load_model()
+
 
 if __name__ == "__main__":
     app.run(host="localhost", port="4001", debug=True)
