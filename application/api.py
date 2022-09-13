@@ -11,7 +11,7 @@ from sklearn.cluster import KMeans
 plt.style.use('fivethirtyeight')
 sns.set_style('darkgrid')
 
-def main() :
+app = Flask(__name__)
 
     @st.cache
     def load_data():
@@ -93,5 +93,5 @@ def main() :
     id_client = sample.index.values
     clf = load_model()
 
-if __name__ == '__main__':
-    main()
+if __name__ == "__main__":
+    app.run(host="localhost", port="5000", debug=True)
