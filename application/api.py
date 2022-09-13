@@ -94,4 +94,4 @@ app = Flask(__name__)
     clf = load_model()
 
 if __name__ == "__main__":
-    app.run(host="localhost", port="5000", debug=True)
+    app.run(host="localhost", port="4001", debug=True)
