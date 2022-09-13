@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from flask import Flask
 
+URL_API = "http://localhost:4001/"
+
 def main() :
     
     #######################################
