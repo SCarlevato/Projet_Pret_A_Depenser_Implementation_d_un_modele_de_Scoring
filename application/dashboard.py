@@ -200,6 +200,24 @@ def identite_client(data, id):
     id_client = sample.index.values
     
     clf = load_model()    
+
+def load_infos_gen(data):
+    lst_infos = [data.shape[0],
+                     round(data["AMT_INCOME_TOTAL"].mean(), 2),
+                     round(data["AMT_CREDIT"].mean(), 2)]
+
+    nb_credits = lst_infos[0]
+    rev_moy = lst_infos[1]
+    credits_moy = lst_infos[2]
+
+    targets = data.TARGET.value_counts()
+
+    return nb_credits, rev_moy, credits_moy, targets
+
+
+
+   
+
   
 if __name__ == '__main__':
     main()
