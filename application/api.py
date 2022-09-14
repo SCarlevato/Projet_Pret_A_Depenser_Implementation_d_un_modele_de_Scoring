@@ -38,6 +38,25 @@ def load_data_target():
     target = data.iloc[:, -1:]
     return json.dumps(list(target))
 
+@app.route("/load_infos_gen/credit", methods=["GET"])
+def load_infos_gen_credit():
+    z = ZipFile("data/data_final.zip")
+    data = pd.read_csv(z.open('data_final.csv'), index_col='SK_ID_CURR', encoding='utf-8')
+    lst_infos = [data.shape[0],
+                 round(data["AMT_INCOME_TOTAL"].mean(), 2),
+                 round(data["AMT_CREDIT"].mean(), 2)]
+    nb_credits = lst_infos[0]
+    rev_moy = lst_infos[1]
+    credits_moy = lst_infos[2]
+    return jsonify(nb_credits, rev_moy, credits_moy)
+
+@app.route("/load_infos_gen/targets", methods=["GET"])
+def load_infos_gen_targets():
+    z = ZipFile("data/data_final.zip")
+    data = pd.read_csv(z.open('data_final.csv'), index_col='SK_ID_CURR', encoding='utf-8')
+    targets = data.TARGET.value_counts()
+    return json.dumps(list(targets))
+
 @app.route("/load_age_population", methods=["GET"])
 def load_age_population():
     z = ZipFile("data/data_final.zip")
