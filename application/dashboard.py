@@ -167,46 +167,93 @@ def main() :
     #######################################
     # EXTRAS #
     #######################################    
+
+@st.cache    
+def load_data_data():
+    load_data_data = request.get(URL_API + "load_data/data")
+    load_data_data = load_data_data.json()
+    return load_data_data
     
-    def load_model():
-        '''Chargement du Modèle Entraîné'''
-        pickle_in = open('modele/classifier_xgb_model.pkl', 'rb')
-        clf = pickle.load(pickle_in)
-        return clf
+@st.cache    
+def load_data_sample():
+    load_data_sample = request.get(URL_API + "load_data/sample")
+    load_data_sample = load_data_sample.json()
+    return load_data_sample    
     
-    def identite_client(data, id):
-        data_client = data[data.index == int(id)]
-        return data_client
+@st.cache    
+def load_data_description():
+    load_data_description = request.get(URL_API + "load_data/description")
+    load_data_description = load_data_description.json()
+    return load_data_description    
     
-    # Chargement des Données :
+@st.cache    
+def load_data_target():
+    load_data_target = request.get(URL_API + "load_data/target")
+    load_data_target = json.dumps(list(target))
+    return load_data_target
+
+@st.cache  
+def load_infos_gen_credit():
+    lst_infos = requests.get(URL_API + "/load_infos_gen/credit")
+    lst_infos = lst_infos.json()
+    nb_credits = lst_infos[0]
+    rev_moy = lst_infos[1]
+    credits_moy = lst_infos[2]
+    targets = requests.get(URL_API + "/load_infos_gen/targets")
+    targets = targets.json()
+    return nb_credits, rev_moy, credits_moy, targets
+    
+@st.cache
+def load_age_population():
+    data_age_json = requests.get(URL_API + "load_age_population")
+    data_age = data_age_json.json()
+    return data_age
+    
+@st.cache
+def load_income_population():
+    df_income_json = requests.get(URL_API + "load_income_population")
+    df_income = df_income_json.json()
+    return df_income   
+    
+def load_model():
+    '''Chargement du Modèle Entraîné'''
+    pickle_in = open('modele/classifier_xgb_model.pkl', 'rb')
+    clf = pickle.load(pickle_in)
+    return clf
+    
+def identite_client(data, id):
+    data_client = data[data.index == int(id)]
+    return data_client
+
+# Chargement des Données :
     data, sample, target, description = load_data()
     id_client = sample.index.values
     clf = load_model()
     
-    @st.cache(allow_output_mutation=True)
-    def load_knn(sample):
-        knn = knn_training(sample)
-        return knn
+@st.cache(allow_output_mutation=True)
+def load_knn(sample):
+    knn = knn_training(sample)
+    return knn
     
-    @st.cache
-    def load_kmeans(sample, id, mdl):
-        index = sample[sample.index == int(id)].index.values
-        index = index[0]
-        data_client = pd.DataFrame(sample.loc[sample.index, :])
-        df_neighbors = pd.DataFrame(knn.fit_predict(data_client), index=data_client.index)
-        df_neighbors = pd.concat([df_neighbors, data], axis=1)
-        return df_neighbors.iloc[:,1:].sample(10)
+@st.cache
+def load_kmeans(sample, id, mdl):
+    index = sample[sample.index == int(id)].index.values
+    index = index[0]
+    data_client = pd.DataFrame(sample.loc[sample.index, :])
+    df_neighbors = pd.DataFrame(knn.fit_predict(data_client), index=data_client.index)
+    df_neighbors = pd.concat([df_neighbors, data], axis=1)
+    return df_neighbors.iloc[:,1:].sample(10)
 
-    @st.cache
-    def knn_training(sample):
-        knn = KMeans(n_clusters=2).fit(sample)
-        return knn
+@st.cache
+def knn_training(sample):
+    knn = KMeans(n_clusters=2).fit(sample)
+    return knn
     
-    @st.cache
-    def load_prediction(sample, id, clf):
-        X=sample.iloc[:, :-1]
-        score = clf.predict_proba(X[X.index == int(id)])[:,1]
-        return score
+@st.cache
+def load_prediction(sample, id, clf):
+    X=sample.iloc[:, :-1]
+    score = clf.predict_proba(X[X.index == int(id)])[:,1]
+    return score
 
 if __name__ == '__main__':
     main()
