@@ -45,5 +45,13 @@ def load_age_population():
     data_age = round((data["DAYS_BIRTH"]/365), 2)
     return json.dumps(list(data_age))
 
+@app.route("/load_income_population/", methods=["GET"])
+def load_income_population():
+    z = ZipFile("/Users/sylvaincarlevato/p7scoringopenclassrooms/data/X_enc.zip")
+    sample = pd.read_csv(z.open('X_enc.csv'), index_col='SK_ID_CURR', encoding='utf-8')
+    df_income = pd.DataFrame(sample["AMT_INCOME_TOTAL"])
+    df_income = df_income.loc[df_income['AMT_INCOME_TOTAL'] < 200000, :]
+    return df_income.to_json(orient='values')
+
 if __name__ == "__main__":
     app.run(host="localhost", port="4001", debug=True)
