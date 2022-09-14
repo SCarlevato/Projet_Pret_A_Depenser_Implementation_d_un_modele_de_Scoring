@@ -163,6 +163,12 @@ def main() :
         
     st.markdown('***')
     st.markdown("Merci de votre attention.")
-  
+ 
+    def load_model():
+        '''Chargement du Modèle Entraîné'''
+        pickle_in = open('modele/classifier_xgb_model.pkl', 'rb')
+        clf = pickle.load(pickle_in)
+        return clf
+   
 if __name__ == '__main__':
     main()
