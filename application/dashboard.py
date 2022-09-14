@@ -163,61 +163,6 @@ def main() :
         
     st.markdown('***')
     st.markdown("Merci de votre attention.")
-
-def load_data():
-    z = ZipFile("data/data_final.zip")
-    
-    data = pd.read_csv(z.open('data_final.csv'), index_col='SK_ID_CURR', encoding ='utf-8')
-
-    z = ZipFile("data/X_enc.zip")
-    
-    sample = pd.read_csv(z.open('X_enc.csv'), index_col='SK_ID_CURR', encoding ='utf-8')
-        
-    description = pd.read_csv("data/features_description.csv", usecols=['Row', 'Description'], index_col=0, encoding= 'unicode_escape')
-
-    target = data.iloc[:, -1:]
-     
-    return data, sample, target, description
-  
-def load_model():
-    '''Chargement du Modèle Entraîné'''
-    
-    pickle_in = open('modele/classifier_xgb_model.pkl', 'rb')
-    
-    clf = pickle.load(pickle_in)
-    
-    return clf    
-    
-def identite_client(data, id):
-    
-    data_client = data[data.index == int(id)]
-    
-    return data_client
-
-    # Chargement des Données :
-    data, sample, target, description = load_data()
-    
-    id_client = sample.index.values
-    
-    clf = load_model()    
-
-def load_infos_gen(data):
-    lst_infos = [data.shape[0],
-                     round(data["AMT_INCOME_TOTAL"].mean(), 2),
-                     round(data["AMT_CREDIT"].mean(), 2)]
-
-    nb_credits = lst_infos[0]
-    rev_moy = lst_infos[1]
-    credits_moy = lst_infos[2]
-
-    targets = data.TARGET.value_counts()
-
-    return nb_credits, rev_moy, credits_moy, targets
-
-
-
-   
-
   
 if __name__ == '__main__':
     main()
