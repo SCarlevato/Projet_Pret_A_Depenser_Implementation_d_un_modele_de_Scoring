@@ -173,6 +173,11 @@ def main() :
     def identite_client(data, id):
         data_client = data[data.index == int(id)]
         return data_client
+    
+    # Chargement des Données :
+    data, sample, target, description = load_data()
+    id_client = sample.index.values
+    clf = load_model()
    
 if __name__ == '__main__':
     main()
