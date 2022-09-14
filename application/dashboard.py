@@ -163,7 +163,11 @@ def main() :
         
     st.markdown('***')
     st.markdown("Merci de votre attention.")
- 
+
+    #######################################
+    # EXTRAS #
+    #######################################    
+    
     def load_model():
         '''Chargement du Modèle Entraîné'''
         pickle_in = open('modele/classifier_xgb_model.pkl', 'rb')
