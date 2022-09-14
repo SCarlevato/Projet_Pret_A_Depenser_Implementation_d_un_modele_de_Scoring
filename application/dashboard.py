@@ -197,6 +197,12 @@ def main() :
     def knn_training(sample):
         knn = KMeans(n_clusters=2).fit(sample)
         return knn
+    
+    @st.cache
+    def load_prediction(sample, id, clf):
+        X=sample.iloc[:, :-1]
+        score = clf.predict_proba(X[X.index == int(id)])[:,1]
+        return score
 
 if __name__ == '__main__':
     main()
