@@ -169,6 +169,10 @@ def main() :
         pickle_in = open('modele/classifier_xgb_model.pkl', 'rb')
         clf = pickle.load(pickle_in)
         return clf
+    
+    def identite_client(data, id):
+        data_client = data[data.index == int(id)]
+        return data_client
    
 if __name__ == '__main__':
     main()
