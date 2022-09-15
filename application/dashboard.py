@@ -21,8 +21,8 @@ def main() :
 
     @st.cache
     def load_data_data():
-    data_json = requests.get(URL_API + "load_data/data")
-    data = data_json.json()
+        data_json = requests.get(URL_API + "load_data/data")
+        return data = data_json.json()
 
     def load_model():
         '''Chargement du Modèle Entraîné'''
