@@ -24,11 +24,7 @@ def main() :
         data_json = requests.get("http://localhost:4001/load_data/data")
         data = data_json.json()
         return data
-    
-    
-    
-    
-    
+  
     def load_data2():
         z = ZipFile("data/X_enc.zip")
         sample = pd.read_csv(z.open('X_enc.csv'), index_col='SK_ID_CURR', encoding ='utf-8')
