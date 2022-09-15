@@ -202,7 +202,7 @@ def load_data_target():
     return load_data_target
 
 @st.cache  
-def load_infos_gen_credit():
+def load_infos_gen_credit(data):
     lst_infos = requests.get(URL_API + "/load_infos_gen/credit")
     lst_infos = lst_infos.json()
     nb_credits = lst_infos[0]
@@ -213,13 +213,13 @@ def load_infos_gen_credit():
     return nb_credits, rev_moy, credits_moy, targets
     
 @st.cache
-def load_age_population():
+def load_age_population(data):
     data_age_json = requests.get(URL_API + "load_age_population")
     data_age = data_age_json.json()
     return data_age
     
 @st.cache
-def load_income_population():
+def load_income_population(sample):
     df_income_json = requests.get(URL_API + "load_income_population")
     df_income = df_income_json.json()
     return df_income   
