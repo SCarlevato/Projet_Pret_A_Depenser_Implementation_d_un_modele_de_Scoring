@@ -73,4 +73,4 @@ def load_income_population():
     return df_income.to_json(orient='values')
 
 if __name__ == "__main__":
-    app.run(host="localhost", port="4001", debug=True)
+    app.run(host="localhost", port="4003", debug=True)
