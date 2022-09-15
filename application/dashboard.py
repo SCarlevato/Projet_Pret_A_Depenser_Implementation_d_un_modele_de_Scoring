@@ -10,7 +10,7 @@ from zipfile import ZipFile
 from sklearn.cluster import KMeans
 import requests
 import json
-from api import load_data()
+from api& import load_data()
 from PIL import Image
 
 plt.style.use('fivethirtyeight')
@@ -82,7 +82,7 @@ def main() :
 
     #Chargement des Données :
     
-    data, sample, target, description = load_data()
+    data, sample, target, description = load_data
     id_client = sample.index.values
     clf = load_model()
 
