@@ -34,17 +34,6 @@ def main() :
 
         return data, sample, target, description
 
-    def load_data2():
-        z = ZipFile("data/X_enc.zip")
-        sample = pd.read_csv(z.open('X_enc.csv'), index_col='SK_ID_CURR', encoding ='utf-8')
-        
-        description = pd.read_csv("data/features_description.csv",
-                                  usecols=['Row', 'Description'], index_col=0, encoding= 'unicode_escape')
-
-        target = data.iloc[:, -1:]
-
-        return sample, target, description
-
     def load_model():
         '''Chargement du Modèle Entraîné'''
         pickle_in = open('modele/classifier_xgb_model.pkl', 'rb')
