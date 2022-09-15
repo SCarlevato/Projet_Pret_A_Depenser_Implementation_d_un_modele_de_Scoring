@@ -11,6 +11,7 @@ from sklearn.cluster import KMeans
 import requests
 import json
 import apipi
+from apipi import load_data()
 from PIL import Image
 
 plt.style.use('fivethirtyeight')
