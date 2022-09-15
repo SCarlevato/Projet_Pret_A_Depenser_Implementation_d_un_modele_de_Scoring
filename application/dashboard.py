@@ -178,28 +178,15 @@ def main() :
     #######################################    
 
 @st.cache    
-def load_data_data():
-    load_data_data = request.get(URL_API + "load_data/data")
-    load_data_data = load_data_data.json()
-    return load_data_data
-    
-@st.cache    
-def load_data_sample():
-    load_data_sample = request.get(URL_API + "load_data/sample")
-    load_data_sample = load_data_sample.json()
-    return load_data_sample    
-    
-@st.cache    
-def load_data_description():
-    load_data_description = request.get(URL_API + "load_data/description")
-    load_data_description = load_data_description.json()
-    return load_data_description    
-    
-@st.cache    
-def load_data_target():
-    load_data_target = request.get(URL_API + "load_data/target")
-    load_data_target = json.dumps(list(target))
-    return load_data_target
+def load_data():
+    z = ZipFile("data/data_final.zip")
+    data = pd.read_csv(z.open('data_final.csv'), index_col='SK_ID_CURR', encoding ='utf-8')
+    z = ZipFile("data/X_enc.zip")
+    sample = pd.read_csv(z.open('X_enc.csv'), index_col='SK_ID_CURR', encoding ='utf-8')
+    description = pd.read_csv("data/features_description.csv",
+                                  usecols=['Row', 'Description'], index_col=0, encoding= 'unicode_escape')
+    target = data.iloc[:, -1:]
+    return data, sample, target, description
 
 @st.cache  
 def load_infos_gen_credit(data):
