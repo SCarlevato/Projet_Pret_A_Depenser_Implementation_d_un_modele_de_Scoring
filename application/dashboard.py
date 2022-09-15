@@ -15,7 +15,7 @@ from PIL import Image
 plt.style.use('fivethirtyeight')
 sns.set_style('darkgrid')
 
-URL_API = "http://localhost:4003/"
+URL_API = "http://localhost:4001/"
 
 def main() :
 
