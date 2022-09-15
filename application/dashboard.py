@@ -20,10 +20,16 @@ URL_API = "http://localhost:4001/"
 def main() :
 
     @st.cache
-    def load_data():
-        z = ZipFile("data/data_final.zip")
-        data = pd.read_csv(z.open('data_final.csv'), index_col='SK_ID_CURR', encoding ='utf-8')
-
+    def load_data_data():
+    data_json = requests.get(URL_API + "load_data/data")
+    data = data_json.json()
+    return data
+    
+    
+    
+    
+    
+    def load_data2():
         z = ZipFile("data/X_enc.zip")
         sample = pd.read_csv(z.open('X_enc.csv'), index_col='SK_ID_CURR', encoding ='utf-8')
         
@@ -32,7 +38,7 @@ def main() :
 
         target = data.iloc[:, -1:]
 
-        return data, sample, target, description
+        return sample, target, description
 
     def load_model():
         '''Chargement du Modèle Entraîné'''
@@ -95,7 +101,8 @@ def main() :
         return knn
 
     #Chargement des Données :
-    data, sample, target, description = load_data()
+    data = load_data_data()
+    sample, target, description = load_data2()
     id_client = sample.index.values
     clf = load_model()
 
