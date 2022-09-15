@@ -87,9 +87,7 @@ def main() :
         return knn
 
     #Chargement des Données :
-    data, sample, target, description = load_data_data()
-    id_client = sample.index.values
-    clf = load_model()
+    data = load_data_data()
 
     #######################################
     # SIDEBAR #
