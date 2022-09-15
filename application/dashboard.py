@@ -18,7 +18,87 @@ sns.set_style('darkgrid')
 URL_API = "http://localhost:4001/"
 
 def main() :
-    
+
+    @st.cache
+    def load_data():
+        z = ZipFile("data/data_final.zip")
+        data = pd.read_csv(z.open('data_final.csv'), index_col='SK_ID_CURR', encoding ='utf-8')
+
+        z = ZipFile("data/X_enc.zip")
+        sample = pd.read_csv(z.open('X_enc.csv'), index_col='SK_ID_CURR', encoding ='utf-8')
+        
+        description = pd.read_csv("data/features_description.csv",
+                                  usecols=['Row', 'Description'], index_col=0, encoding= 'unicode_escape')
+
+        target = data.iloc[:, -1:]
+
+        return data, sample, target, description
+
+    def load_model():
+        '''Chargement du Modèle Entraîné'''
+        pickle_in = open('modele/classifier_xgb_model.pkl', 'rb')
+        clf = pickle.load(pickle_in)
+        return clf
+
+    @st.cache(allow_output_mutation=True)
+    def load_knn(sample):
+        knn = knn_training(sample)
+        return knn
+
+    @st.cache
+    def load_infos_gen(data):
+        lst_infos = [data.shape[0],
+                     round(data["AMT_INCOME_TOTAL"].mean(), 2),
+                     round(data["AMT_CREDIT"].mean(), 2)]
+
+        nb_credits = lst_infos[0]
+        rev_moy = lst_infos[1]
+        credits_moy = lst_infos[2]
+
+        targets = data.TARGET.value_counts()
+
+        return nb_credits, rev_moy, credits_moy, targets
+
+    def identite_client(data, id):
+        data_client = data[data.index == int(id)]
+        return data_client
+
+    @st.cache
+    def load_age_population(data):
+        data_age = round((data["DAYS_BIRTH"]/365), 2)
+        return data_age
+
+    @st.cache
+    def load_income_population(sample):
+        df_income = pd.DataFrame(sample["AMT_INCOME_TOTAL"])
+        df_income = df_income.loc[df_income['AMT_INCOME_TOTAL'] < 200000, :]
+        return df_income
+
+    @st.cache
+    def load_prediction(sample, id, clf):
+        X=sample.iloc[:, :-1]
+        score = clf.predict_proba(X[X.index == int(id)])[:,1]
+        return score
+
+    @st.cache
+    def load_kmeans(sample, id, mdl):
+        index = sample[sample.index == int(id)].index.values
+        index = index[0]
+        data_client = pd.DataFrame(sample.loc[sample.index, :])
+        df_neighbors = pd.DataFrame(knn.fit_predict(data_client), index=data_client.index)
+        df_neighbors = pd.concat([df_neighbors, data], axis=1)
+        return df_neighbors.iloc[:,1:].sample(10)
+
+    @st.cache
+    def knn_training(sample):
+        knn = KMeans(n_clusters=2).fit(sample)
+        return knn
+
+    #Chargement des Données :
+    data, sample, target, description = load_data()
+    id_client = sample.index.values
+    clf = load_model()
+
     #######################################
     # SIDEBAR #
     #######################################
@@ -172,84 +252,6 @@ def main() :
         
     st.markdown('***')
     st.markdown("Merci de votre attention.")
-
-    #######################################
-    # EXTRAS #
-    #######################################    
-
-@st.cache    
-def load_data():
-    z = ZipFile("data/data_final.zip")
-    data = pd.read_csv(z.open('data_final.csv'), index_col='SK_ID_CURR', encoding ='utf-8')
-    z = ZipFile("data/X_enc.zip")
-    sample = pd.read_csv(z.open('X_enc.csv'), index_col='SK_ID_CURR', encoding ='utf-8')
-    description = pd.read_csv("data/features_description.csv",
-                                  usecols=['Row', 'Description'], index_col=0, encoding= 'unicode_escape')
-    target = data.iloc[:, -1:]
-    return data, sample, target, description
-
-@st.cache  
-def load_infos_gen_credit(data):
-    lst_infos = requests.get(URL_API + "/load_infos_gen/credit")
-    lst_infos = lst_infos.json()
-    nb_credits = lst_infos[0]
-    rev_moy = lst_infos[1]
-    credits_moy = lst_infos[2]
-    targets = requests.get(URL_API + "/load_infos_gen/targets")
-    targets = targets.json()
-    return nb_credits, rev_moy, credits_moy, targets
-    
-@st.cache
-def load_age_population(data):
-    data_age_json = requests.get(URL_API + "load_age_population")
-    data_age = data_age_json.json()
-    return data_age
-    
-@st.cache
-def load_income_population(sample):
-    df_income_json = requests.get(URL_API + "load_income_population")
-    df_income = df_income_json.json()
-    return df_income   
-    
-def load_model():
-    '''Chargement du Modèle Entraîné'''
-    pickle_in = open('modele/classifier_xgb_model.pkl', 'rb')
-    clf = pickle.load(pickle_in)
-    return clf
-    
-def identite_client(data, id):
-    data_client = data[data.index == int(id)]
-    return data_client
-
-# Chargement des Données :
-    data, sample, target, description = load_data()
-    id_client = sample.index.values
-    clf = load_model()
-    
-@st.cache(allow_output_mutation=True)
-def load_knn(sample):
-    knn = knn_training(sample)
-    return knn
-    
-@st.cache
-def load_kmeans(sample, id, mdl):
-    index = sample[sample.index == int(id)].index.values
-    index = index[0]
-    data_client = pd.DataFrame(sample.loc[sample.index, :])
-    df_neighbors = pd.DataFrame(knn.fit_predict(data_client), index=data_client.index)
-    df_neighbors = pd.concat([df_neighbors, data], axis=1)
-    return df_neighbors.iloc[:,1:].sample(10)
-
-@st.cache
-def knn_training(sample):
-    knn = KMeans(n_clusters=2).fit(sample)
-    return knn
-    
-@st.cache
-def load_prediction(sample, id, clf):
-    X=sample.iloc[:, :-1]
-    score = clf.predict_proba(X[X.index == int(id)])[:,1]
-    return score
 
 if __name__ == '__main__':
     main()
