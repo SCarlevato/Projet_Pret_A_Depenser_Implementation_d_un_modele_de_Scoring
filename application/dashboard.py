@@ -82,7 +82,7 @@ def main() :
 
     #Chargement des Données :
     
-    data, sample, target, description = api.load_data()
+    data, sample, target, description = load_data()
     id_client = sample.index.values
     clf = load_model()
 
