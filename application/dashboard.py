@@ -21,7 +21,7 @@ def main() :
 
     @st.cache
     def load_data_data():
-        data_json = requests.get(URL_API + "load_data/data")
+        data_json = requests.get("http://localhost:4001/load_data/data")
         data = data_json.json()
         return data
     
