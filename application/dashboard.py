@@ -15,13 +15,13 @@ from PIL import Image
 plt.style.use('fivethirtyeight')
 sns.set_style('darkgrid')
 
-URL_API = "http://localhost:4001/"
+URL_API = "http://localhost:4003/"
 
 def main() :
 
     @st.cache
     def load_data_data():
-        data_json = requests.get("http://localhost:4001/load_data/data")
+        data_json = requests.get("http://localhost:4003/load_data/data")
         data = data_json.json()
         return data
     
