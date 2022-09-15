@@ -11,7 +11,6 @@ from sklearn.cluster import KMeans
 import requests
 import json
 import apipi
-from apipi import load_data
 from PIL import Image
 
 plt.style.use('fivethirtyeight')
@@ -83,7 +82,7 @@ def main() :
 
     #Chargement des Données :
     
-    data, sample, target, description = load_data(data, sample, target, description)
+    data, sample, target, description = apipi.load_data()
     id_client = sample.index.values
     clf = load_model()
 
