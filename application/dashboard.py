@@ -1,9 +1,19 @@
 import streamlit as st
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pickle
+import shap
+import plotly.express as px
+from zipfile import ZipFile
+from sklearn.cluster import KMeans
 import requests
 import json
-import pandas as pd
-import matplotlib.pyplot as plt
 from PIL import Image
+
+plt.style.use('fivethirtyeight')
+sns.set_style('darkgrid')
 
 URL_API = "http://localhost:4001/"
 
