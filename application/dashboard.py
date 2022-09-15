@@ -23,7 +23,7 @@ def main() :
     def load_data_data():
     data_json = requests.get(URL_API + "load_data/data")
     data = data_json.json()
-    return data
+        return data
     
     
     
