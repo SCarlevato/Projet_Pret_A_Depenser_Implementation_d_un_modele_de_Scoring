@@ -83,7 +83,7 @@ def main() :
 
     #Chargement des Données :
     
-    data, sample, target, description = load_data(data, sample, target, descriptio,)
+    data, sample, target, description = load_data(data, sample, target, description)
     id_client = sample.index.values
     clf = load_model()
 
