@@ -10,7 +10,6 @@ from zipfile import ZipFile
 from sklearn.cluster import KMeans
 import requests
 import json
-import apipi.py
 import flask
 from PIL import Image
 
@@ -83,7 +82,7 @@ def main() :
 
     #Chargement des Données :
     
-    data, sample, target, description = apipi.load_data()
+    data, sample, target, description = load_data()
     id_client = sample.index.values
     clf = load_model()
 
