@@ -41,18 +41,18 @@ def load_model():
                        
     return clf
                        
-def load_knn(sample):
-                       
-     knn = knn_training(sample)
-                       
-    return knn
-
 def identite_client(data, id):
                        
      data_client = data[data.index == int(id)]
                        
      return data_client
-
+                       
+ def load_knn(sample):
+                       
+     knn = knn_training(sample)
+                       
+    return knn                      
+                       
  def load_kmeans(sample, id, mdl):
                        
      index = sample[sample.index == int(id)].index.values
