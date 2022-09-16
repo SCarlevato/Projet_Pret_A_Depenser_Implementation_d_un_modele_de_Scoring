@@ -45,35 +45,35 @@ def load_model():
                        
 def identite_client(data, id):
                        
-     data_client = data[data.index == int(id)]
+    data_client = data[data.index == int(id)]
                        
-     return data_client  
+    return data_client  
 
 def load_knn(sample):
      
-     knn = knn_training(sample)
+    knn = knn_training(sample)
      
-     return knn
+    return knn
     
 def load_kmeans(sample, id, mdl):
     
-     index = sample[sample.index == int(id)].index.values
+    index = sample[sample.index == int(id)].index.values
      
-     index = index[0]
+    index = index[0]
         
-     data_client = pd.DataFrame(sample.loc[sample.index, :])
+    data_client = pd.DataFrame(sample.loc[sample.index, :])
      
-     df_neighbors = pd.DataFrame(knn.fit_predict(data_client), index=data_client.index)
+    df_neighbors = pd.DataFrame(knn.fit_predict(data_client), index=data_client.index)
      
-     df_neighbors = pd.concat([df_neighbors, data], axis=1)
+    df_neighbors = pd.concat([df_neighbors, data], axis=1)
         
-     return df_neighbors.iloc[:,1:].sample(10)
+    return df_neighbors.iloc[:,1:].sample(10)
                        
 def knn_training(sample): 
     
-     knn = KMeans(n_clusters=2).fit(sample)              
+    knn = KMeans(n_clusters=2).fit(sample)              
      
-     return knn
+    return knn
                                     
 def load_prediction(sample, id, clf):
         
