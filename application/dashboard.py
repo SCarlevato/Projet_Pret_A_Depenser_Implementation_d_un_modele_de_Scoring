@@ -18,22 +18,13 @@ sns.set_style('darkgrid')
 URL_API = "http://localhost:4001/"
 
 def main() :
-    
-    @st.cache
-    def load_data():
-        z = ZipFile("data/data_final.zip")
-        data = pd.read_csv(z.open('data_final.csv'), index_col='SK_ID_CURR', encoding ='utf-8')
 
-        z = ZipFile("data/X_enc.zip")
-        sample = pd.read_csv(z.open('X_enc.csv'), index_col='SK_ID_CURR', encoding ='utf-8')
-        
-        description = pd.read_csv("data/features_description.csv",
-                                  usecols=['Row', 'Description'], index_col=0, encoding= 'unicode_escape')
+    @st.cache()
+    def load_data_data():
+        data_json = requests.get(URL_API + "load_data/data")
+        data = data_json.json()
+        return data
 
-        target = data.iloc[:, -1:]
-
-        return data, sample, target, description
-    
     def load_model():
         '''Chargement du Modèle Entraîné'''
         pickle_in = open('modele/classifier_xgb_model.pkl', 'rb')
