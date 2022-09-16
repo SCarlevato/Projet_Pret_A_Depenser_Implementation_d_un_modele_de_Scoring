@@ -24,7 +24,22 @@ def main() :
     def load_knn(sample):
         knn = knn_training(sample)
         return knn
-   
+    
+    
+    @st.cache
+    def load_kmeans(sample, id, mdl):
+        index = sample[sample.index == int(id)].index.values
+        index = index[0]
+        data_client = pd.DataFrame(sample.loc[sample.index, :])
+        df_neighbors = pd.DataFrame(knn.fit_predict(data_client), index=data_client.index)
+        df_neighbors = pd.concat([df_neighbors, data], axis=1)
+        return df_neighbors.iloc[:,1:].sample(10)
+                       
+    @st.cache
+    def knn_training(sample):                 
+    knn = KMeans(n_clusters=2).fit(sample)              
+        return knn
+    
     # Chargement des Données :
     data, sample, target, description = load_data()
     id_client = sample.index.values
