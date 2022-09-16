@@ -11,6 +11,8 @@ from sklearn.cluster import KMeans
 import requests
 import json
 from PIL import Image
+import streamlit as st
+import streamlit.components.v1 as components
 
 plt.style.use('fivethirtyeight')
 sns.set_style('darkgrid')
@@ -41,23 +43,23 @@ def load_model():
                        
     return clf
                        
+def identite_client(data, id):
+                       
+     data_client = data[data.index == int(id)]
+                       
+     return data_client                    
+                                    
 def load_prediction(sample, id, clf):
         
     X=sample.iloc[:, :-1]
                        
     score = clf.predict_proba(X[X.index == int(id)])[:,1]
                        
-    return score
-                                          
-def identite_client(data, id):
-                       
-     data_client = data[data.index == int(id)]
-                       
-     return data_client
+    return score                                      
                        
  def load_knn(sample):
                        
-     knn = knn_training(sample)
+    knn = knn_training(sample)
                        
     return knn                      
                        
