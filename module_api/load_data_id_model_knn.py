@@ -77,7 +77,7 @@ def load_kmeans(sample, id, mdl):
                        
      return df_neighbors.iloc[:,1:].sample(10)
                        
- def knn_training(sample):
+def knn_training(sample):
                        
      knn = KMeans(n_clusters=2).fit(sample)
                        
