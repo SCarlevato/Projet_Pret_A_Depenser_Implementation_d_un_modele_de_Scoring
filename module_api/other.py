@@ -1,4 +1,21 @@
+import streamlit as st
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pickle
+import shap
+import plotly.express as px
+from zipfile import ZipFile
+from sklearn.cluster import KMeans
+import requests
+import json
+from PIL import Image
+import streamlit as st
+import streamlit.components.v1 as components
 
+plt.style.use('fivethirtyeight')
+sns.set_style('darkgrid')
 
 def load_infos_gen(data):
     
