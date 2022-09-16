@@ -31,13 +31,13 @@ def load_infos_gen(data):
     
     prop_default = targets
     
-    return jsonify({"nb_credits":nb_credits, "rev_moy": rev_moy, "credits_moy": credits_moy})
+    return nb_credits, rev_moy, credits_moy, targets
 
 def load_age_population():
 
     data_age = round((data["DAYS_BIRTH"]/365), 2)
     
-    return json.dumps(list(data_age))
+    return data_age
 
 def load_income_population():
 
@@ -45,4 +45,4 @@ def load_income_population():
     
     df_income = df_income.loc[df_income['AMT_INCOME_TOTAL'] < 200000, :]
     
-    return df_income.to_json(orient='values')
+    return df_income
