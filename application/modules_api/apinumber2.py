@@ -25,10 +25,10 @@ def load_data():
     return data, sample, target, description
 
 def load_model():
-    '''Chargement du Modèle Entraîné'''
-    pickle_in = open('modele/classifier_xgb_model.pkl', 'rb')
-    clf = pickle.load(pickle_in)
-    return clf
+       '''Chargement du Modèle Entraîné'''
+        pickle_in = open('modele/classifier_xgb_model.pkl', 'rb')
+        clf = pickle.load(pickle_in)
+        return clf
                        
 def load_knn(sample):
      knn = knn_training(sample)
