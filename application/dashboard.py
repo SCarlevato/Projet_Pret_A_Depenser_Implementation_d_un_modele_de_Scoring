@@ -10,6 +10,7 @@ from zipfile import ZipFile
 from sklearn.cluster import KMeans
 import requests
 import json
+import api
 from PIL import Image
 
 plt.style.use('fivethirtyeight')
