@@ -63,7 +63,7 @@ def load_knn(sample):
                        
     return knn                      
                        
- def load_kmeans(sample, id, mdl):
+def load_kmeans(sample, id, mdl):
                        
      index = sample[sample.index == int(id)].index.values
                        
