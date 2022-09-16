@@ -39,7 +39,7 @@ def load_age_population(data):
     
     return data_age
 
-def load_income_population():
+def load_income_population(sample):
 
     df_income = pd.DataFrame(sample["AMT_INCOME_TOTAL"])
     
