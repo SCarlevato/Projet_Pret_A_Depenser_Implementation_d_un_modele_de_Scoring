@@ -37,7 +37,7 @@ def main() :
                        
     @st.cache
     def knn_training(sample):                 
-    knn = KMeans(n_clusters=2).fit(sample)              
+        knn = KMeans(n_clusters=2).fit(sample)              
         return knn
     
     # Chargement des Données :
