@@ -41,6 +41,14 @@ def load_model():
                        
     return clf
                        
+def load_prediction(sample, id, clf):
+        
+    X=sample.iloc[:, :-1]
+                       
+    score = clf.predict_proba(X[X.index == int(id)])[:,1]
+                       
+    return score
+                                          
 def identite_client(data, id):
                        
      data_client = data[data.index == int(id)]
