@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 @app.route('/infos_gen', methods=['POST'])
 
-def load_infos_gen():
+def load_infos_gen(data):
     
     lst_infos = [data.shape[0],round(data["AMT_INCOME_TOTAL"].mean(), 2),round(data["AMT_CREDIT"].mean(), 2)]
     
