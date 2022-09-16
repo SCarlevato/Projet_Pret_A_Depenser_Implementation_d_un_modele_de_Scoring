@@ -20,6 +20,11 @@ URL_API = "http://localhost:4001/"
 
 def main() :
     
+    @st.cache(allow_output_mutation=True)
+    def load_knn(sample):
+        knn = knn_training(sample)
+        return knn
+   
     # Chargement des Données :
     data, sample, target, description = load_data()
     id_client = sample.index.values
