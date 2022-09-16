@@ -29,7 +29,7 @@ def load_data():
                        
     target = data.iloc[:, -1:]
                        
-     return data, sample, target, description
+    return data, sample, target, description
 
 def load_model():
                        
@@ -39,13 +39,13 @@ def load_model():
                        
     clf = pickle.load(pickle_in)
                        
-     return clf
+    return clf
                        
 def load_knn(sample):
                        
      knn = knn_training(sample)
                        
-     return knn
+    return knn
 
 def identite_client(data, id):
                        
