@@ -21,7 +21,7 @@ def load_data():
     
     z = ZipFile("data/data_final.zip")
     
-    data = pd.read_csv(z.open('data_final.csv'), index_col='SK_ID_CURR', encoding ='utf-8'
+    data = pd.read_csv(z.open('data_final.csv'), index_col='SK_ID_CURR', encoding ='utf-8')
                        
     z = ZipFile("data/X_enc.zip")
                        
