@@ -33,7 +33,7 @@ def load_infos_gen(data):
     
     return nb_credits, rev_moy, credits_moy, targets
 
-def load_age_population():
+def load_age_population(data):
 
     data_age = round((data["DAYS_BIRTH"]/365), 2)
     
