@@ -49,7 +49,7 @@ def load_data_target():
 
 @app.route("/load_infos_gen/credit", methods=["GET"])
 def load_infos_gen_credit():
-    z = ZipFile("data/data_final.zip")
+    z = ZipFile("/data/data_final.zip")
     data = pd.read_csv(z.open('data_final.csv'), index_col='SK_ID_CURR', encoding='utf-8')
     lst_infos = [data.shape[0],
                  round(data["AMT_INCOME_TOTAL"].mean(), 2),
@@ -61,21 +61,21 @@ def load_infos_gen_credit():
 
 @app.route("/load_infos_gen/targets", methods=["GET"])
 def load_infos_gen_targets():
-    z = ZipFile("data/data_final.zip")
+    z = ZipFile("/data/data_final.zip")
     data = pd.read_csv(z.open('data_final.csv'), index_col='SK_ID_CURR', encoding='utf-8')
     targets = data.TARGET.value_counts()
     return json.dumps(list(targets))
 
 @app.route("/load_age_population", methods=["GET"])
 def load_age_population():
-    z = ZipFile("data/data_final.zip")
+    z = ZipFile("/data/data_final.zip")
     data = pd.read_csv(z.open('data_final.csv'), index_col='SK_ID_CURR', encoding='utf-8')
     data_age = round((data["DAYS_BIRTH"]/365), 2)
     return json.dumps(list(data_age))
 
 @app.route("/load_income_population", methods=["GET"])
 def load_income_population():
-    z = ZipFile("data/X_enc.zip")
+    z = ZipFile("/data/X_enc.zip")
     sample = pd.read_csv(z.open('X_enc.csv'), index_col='SK_ID_CURR', encoding='utf-8')
     df_income = pd.DataFrame(sample["AMT_INCOME_TOTAL"])
     df_income = df_income.loc[df_income['AMT_INCOME_TOTAL'] < 200000, :]
