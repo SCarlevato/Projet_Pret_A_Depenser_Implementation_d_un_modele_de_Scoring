@@ -55,24 +55,4 @@ def load_prediction(sample, id, clf):
                        
     score = clf.predict_proba(X[X.index == int(id)])[:,1]
                        
-    return score                                            
-                       
-def load_kmeans(sample, id, mdl):
-                       
-     index = sample[sample.index == int(id)].index.values
-                       
-     index = index[0]
-                       
-     data_client = pd.DataFrame(sample.loc[sample.index, :])
-                       
-     df_neighbors = pd.DataFrame(knn.fit_predict(data_client), index=data_client.index)
-                       
-     df_neighbors = pd.concat([df_neighbors, data], axis=1)
-                       
-     return df_neighbors.iloc[:,1:].sample(10)
-                       
-def knn_training(sample):
-                       
-     knn = KMeans(n_clusters=2).fit(sample)
-                       
-     return knn
+    return score                                             
