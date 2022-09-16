@@ -1,11 +1,9 @@
 # Dependencies
 from os import system
 from flask import Flask, request, jsonify
-
 import traceback
 import pandas as pd
 import numpy as np
-from prediction_api import *
 
 # Your API definition
 app = Flask(__name__)
