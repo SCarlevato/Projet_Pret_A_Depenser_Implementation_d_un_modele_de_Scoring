@@ -55,13 +55,7 @@ def load_prediction(sample, id, clf):
                        
     score = clf.predict_proba(X[X.index == int(id)])[:,1]
                        
-    return score                                      
-                       
-def load_knn(sample):
-                       
-    knn = knn_training(sample)
-                       
-    return knn                      
+    return score                                            
                        
 def load_kmeans(sample, id, mdl):
                        
