@@ -19,8 +19,13 @@ sns.set_style('darkgrid')
 URL_API = "http://localhost:4001/"
 
 def main() :
-
-
+    
+    # Chargement des Données :
+    data, sample, target, description = load_data()
+    id_client = sample.index.values
+    clf = load_model()
+    
+    #######################################
     # SIDEBAR #
     #######################################
 
