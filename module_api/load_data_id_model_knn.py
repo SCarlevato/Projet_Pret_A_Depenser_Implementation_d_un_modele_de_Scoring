@@ -57,7 +57,7 @@ def load_prediction(sample, id, clf):
                        
     return score                                      
                        
- def load_knn(sample):
+def load_knn(sample):
                        
     knn = knn_training(sample)
                        
