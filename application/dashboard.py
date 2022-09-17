@@ -16,8 +16,6 @@ from module_api.other import *
 plt.style.use('fivethirtyeight')
 sns.set_style('darkgrid')
 
-URL_API = "http://localhost:4001/"
-
 def main() :
  
     # Chargement des Données :
@@ -48,7 +46,7 @@ def main() :
     nb_credits, rev_moy, credits_moy, targets = load_infos_gen(data)
 
     ### Présentation des Informations dans la Sidebar ###
-    #Nombre d'Emprunts dans l'Echantillon :
+    # Nombre d'Emprunts dans l'Echantillon :
     st.sidebar.markdown("<u>Nombre d'Emprunts dans notre Panel :</u>", unsafe_allow_html=True)
     st.sidebar.text(nb_credits)
 
@@ -166,7 +164,6 @@ def main() :
         st.markdown("<i>…</i>", unsafe_allow_html=True)
             
     # Présentation des Dossiers de Clients Similaires :
-    
     @st.cache(allow_output_mutation=True)
     def load_knn(sample):
         knn = knn_training(sample)
@@ -186,7 +183,7 @@ def main() :
         knn = KMeans(n_clusters=2).fit(sample)              
         return knn
     
-    chk_voisins = st.checkbox("Observations Autres Dossiers Clients :")
+    chk_voisins = st.checkbox("Observations des Autres Dossiers Clients :")
 
     if chk_voisins:
         knn = load_knn(sample)
