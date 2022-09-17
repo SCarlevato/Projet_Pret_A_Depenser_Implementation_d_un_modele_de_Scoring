@@ -133,7 +133,7 @@ def main() :
     prediction = load_prediction(sample, chk_id, clf)
     st.write("**Probabilité Défaut : **{:.0f} %".format(round(float(prediction)*100, 2)))
 
-    if prediction <= 0.10 :
+    if prediction <= 0.54 :
        decision = "<font color='green'>**EMPRUNT ACCEPTE**</font>"
     else:
        decision = "<font color='red'>**EMPRUNT REJETE**</font>"
