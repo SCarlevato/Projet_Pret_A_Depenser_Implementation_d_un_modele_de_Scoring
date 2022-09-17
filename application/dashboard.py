@@ -13,7 +13,7 @@ import requests
 import json
 from PIL import Image
 from module_api.load_data_id_model_knn import *
-from module_api.other import *
+from module_api.informations_client import *
 plt.style.use('fivethirtyeight')
 sns.set_style('darkgrid')
 
