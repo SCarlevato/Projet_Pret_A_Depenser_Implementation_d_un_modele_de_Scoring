@@ -12,8 +12,8 @@ from sklearn.cluster import KMeans
 import requests
 import json
 from PIL import Image
-from module_api.load_data_id_model_knn import *
-from module_api.informations_client import *
+from MODULE_API.load_data_id_model_knn import *
+from MODULE_API.informations_client import *
 plt.style.use('fivethirtyeight')
 sns.set_style('darkgrid')
 
