@@ -138,7 +138,7 @@ def main() :
     else:
        decision = "<font color='red'>**EMPRUNT REJETE**</font>"
 
-    st.write("**Decision** *(avec seuil 54%)* **: **", decision, unsafe_allow_html=True)
+    st.write("**Decision** *(avec seuil 70%)* **: **", decision, unsafe_allow_html=True)
 
     st.markdown("<u>Données Client :</u>", unsafe_allow_html=True)
     st.write(identite_client(data, chk_id))
