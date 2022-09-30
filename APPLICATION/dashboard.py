@@ -178,7 +178,7 @@ def main() :
 
     @st.cache
     def load_data_description():
-        description_json = requests.get(URL_API + "/load_data/description/")
+        description_json = requests.get(URL_API + "/load_data/description")
         description = description_json.json()
         return description
 
