@@ -6,8 +6,6 @@ import numpy as np
 
 app = Flask(__name__)
 
-app = Flask(__name__)
-
 @app.route("/load_data/data", methods=["GET"])
 def load_data_data():
     z = ZipFile("DATASETS/data_final.zip")
